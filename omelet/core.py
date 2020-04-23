@@ -37,6 +37,20 @@ shap.initjs()
 #########################################
 ##  related to model
 #########################################
+
+def model_type(hf):
+    if hf.isfactor()[0]:
+        if hf.as_data_frame().nunique(dropna = True).values[0] > 2:
+            m_type = "multiclass"
+        else:
+            m_type = "binomial"
+    else:
+        m_type = "regression"
+    
+    return m_type
+
+
+    return model_type
 def confusion_matrix_plot(model, data, target_name, result_path="result"):
     """
     Draw Confusion Matrix Plot
@@ -279,6 +293,7 @@ def send_to_mlflow(exp_id, run_name, model, valid, log, model_type, result_path=
             # mlflow Model Parameter
             log.info("[" + run_name + "] Running  | Model Parameter Save")
             mlflow.log_param("algorithm", algo)
+            mlflow.log_param("model_type", model_type)
             mlflow.log_param("response_column", model_params['response_column']['actual']['column_name'])
             mlflow.log_param("nfolds", model_params['nfolds']['actual'])
 
@@ -286,7 +301,7 @@ def send_to_mlflow(exp_id, run_name, model, valid, log, model_type, result_path=
             mlflow.log_param("max_depth", model_params['max_depth']['actual'])
             mlflow.log_param("min_rows", model_params['min_rows']['actual'])
             mlflow.log_param("stopping_metric", model_params['stopping_metric']['actual'])
-            mlflow.log_param("stopping_tolerance", model_params['stopping_tolerance']['actual'])
+            # mlflow.log_param("stopping_tolerance", model_params['stopping_tolerance']['actual'])
 
             # mlflow Metrics Save
             log.info("[" + run_name + "] Running  | Model Metrics Save")
@@ -294,16 +309,19 @@ def send_to_mlflow(exp_id, run_name, model, valid, log, model_type, result_path=
             perf = model.model_performance(valid)
 
             mlflow.log_metric("r2", perf.mse())
-            mlflow.log_metric("logloss", perf.logloss())
             mlflow.log_metric("rmse", perf.rmse())
             mlflow.log_metric("mse", perf.mse())
-
-            if model.auc() is not None:
+            
+            if model_type is "binomial":
                 mlflow.log_metric("auc", perf.auc())
-                
-            if model.mean_per_class_error() is not None:
+                mlflow.log_metric("logloss", perf.logloss())
+                mlflow.log_metric("mean_per_class_error", perf.mean_per_class_error()[0][1])
+            elif model_type is "regression":
+                mlflow.log_metric("mean_residual_deviance", perf.mean_residual_deviance())
+            else:
+                mlflow.log_metric("logloss", perf.logloss())
                 mlflow.log_metric("mean_per_class_error", perf.mean_per_class_error())
-
+            
             # mlflow Model Save (Remote)
             log.info("[" + run_name + "] Running  | Model Save (Remote)")
             mlflow.h2o.log_model(model, 'model')
