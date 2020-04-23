@@ -1,0 +1,15 @@
+artifact_uri: file:///home/yoon/omelet/mlruns/1/1ea4930e8f804d9397778b0ee6720b43/artifacts
+end_time: 1587628261027
+entry_point_name: ''
+experiment_id: '1'
+lifecycle_stage: active
+name: ''
+run_id: 1ea4930e8f804d9397778b0ee6720b43
+run_uuid: 1ea4930e8f804d9397778b0ee6720b43
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1587628260842
+status: 3
+tags: []
+user_id: yoon
