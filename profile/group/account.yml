@@ -1,0 +1,19 @@
+---
+# Title  : Omelet Program Default Configuration
+# Date   : 2020-04-20
+# Author : Yoon Kim
+
+mlflow:
+    exp_name: "account"
+    exp_id: 4
+
+model:
+    max_model: 10
+    max_run_sec: 50
+    nfold: 5
+    
+path:
+    data: "data/"
+    profile: "profile/"
+    log: "log/"
+...
