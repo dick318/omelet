@@ -1,6 +1,7 @@
 import warnings
-warnings.filterwarnings("ignore")
+warnings.simplefilter("ignore")
 
+import os
 import sys
 import time
 import argparse
@@ -9,6 +10,7 @@ from tabulate import tabulate
 
 
 if __name__=='__main__':
+    os.system('cls' if os.name == 'nt' else 'clear')
 
     desc="""\
 
@@ -19,9 +21,9 @@ if __name__=='__main__':
     █  █▄█  █       █    ▄▄▄█   █▄▄▄█    ▄▄▄█ █   █  ▄▄▄ █       █ ▄▄▄▄▄▄█
     █       █ ██▄██ █   █▄▄▄█       █   █▄▄▄  █   █ █   █ █▄   ▄██ █▄▄▄▄▄
     █▄▄▄▄▄▄▄█▄█   █▄█▄▄▄▄▄▄▄█▄▄▄▄▄▄▄█▄▄▄▄▄▄▄█ █▄▄▄█ █▄▄▄█   █▄█  █▄▄▄▄▄▄▄█
-   
-             Automated Machine Learning + XAI + Model Management
-    
+
+            Automated Machine Learning + XAI + Model Management
+
     """
     print(desc)
 
