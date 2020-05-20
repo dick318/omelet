@@ -5,8 +5,9 @@
 # Revision_Date  : 04/23/2020
 # Version        : '0.2.1'
 
+
 import warnings
-warnings.filterwarnings("ignore")
+warnings.filterwarnings
 
 import h2o
 from h2o.automl import H2OAutoML, get_leaderboard
@@ -30,6 +31,8 @@ import yaml
 
 import logging
 from colorlog import ColoredFormatter
+
+
 
 shap.initjs()
 
@@ -70,16 +73,12 @@ def variable_importance_plot(model, log, result_path="result"):
 
     if model.varimp() is not None:
         plt.tight_layout()
-        var_imp = model._model_json['output']['variable_importances'].as_data_frame()
 
-        x = var_imp['scaled_importance']
-        x.index = var_imp['variable']
-
-        plt.figure(figsize=(8, 8))
+        plt.figure(figsize=(12, 8))
+        var_imp = model.varimp_plot()
         plt.title("Variable Importance : " + algo)
         plt.xlabel("Relative Importance")
 
-        x.sort_values().plot(kind='barh')
         plt.savefig(result_path + "/" + "variable_importance.png", dpi=600)
         plt.close()
     else:
