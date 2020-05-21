@@ -4,6 +4,5 @@
 
 ### Documentation
 
-Download the [Documentation](https://github.com/yoonslab/omelet/raw/master/docs/omelet_keynote.pdf) for more information!
-Download the [Documentation](https://github.com/yoonslab/omelet/blob/master/docs/omelet_keynote.pdf?raw_true) for more information!
+Download the [Documentation](https://github.com/yoonslab/omelet/blob/master/docs/omelet_keynote.pdf?raw=true) for more information!
 
