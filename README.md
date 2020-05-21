@@ -4,5 +4,5 @@
 
 ### Documentation
 
-Download the [Documentation](https://modin.readthedocs.io/en/latest/architecture.html) for more information!
+Download the [Documentation](https://github.com/yoonslab/omelet/raw/master/docs/omelet_keynote.pdf) for more information!
 
